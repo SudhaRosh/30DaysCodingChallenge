@@ -1,0 +1,41 @@
+---------------Maximum of all subarrays of size k----------
+Sliding window:
+
+class Solution {
+public:
+    vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+		
+			vector<int> res;
+			deque<int> d;
+			int i;
+			for(i = 0; i < k;i++)
+			{
+					// process first window 
+				while(!d.empty() && nums[i] >= nums[d.back()])
+					d.pop_back();
+				d.push_back(i);
+			}
+        
+			// Now process the remaining windows
+			for(;i < nums.size(); i++)
+			{
+				res.push_back(nums[d.front()]);
+            
+				// Here we are removing the previous window element 
+				while(!d.empty() && (d.front() <= (i-k)))
+					d.pop_front();
+            
+				// As previous we are inserting the largest element in back
+				while(!d.empty() && nums[i] >= nums[d.back()])
+					d.pop_back();
+            
+				// Push the new element into the deque window
+				d.push_back(i);
+			}
+        
+			res.push_back(nums[d.front()]);
+        
+			return res;
+		}
+};
+    
