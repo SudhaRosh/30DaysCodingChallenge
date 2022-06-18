@@ -1,2 +1,1 @@
-# 30DaysCodingChallenge
-#6Companies30Days 
+# Coding Problems based on topics
